@@ -1,0 +1,15 @@
+Fastapi
+PyJWT
+SQLALchemy
+Pydantic
+Pydantic-settings
+Redis
+celery
+uvicorn
+asyncpg
+Alembic
+pytest
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt
+python-multipart
