@@ -1,14 +1,24 @@
 from ..default import *
 
-class AuthSchemaPostRequest(BaseModel):
-    name: str
+class LoginSchemaPostRequest(BaseModel):
+    username: str
     password: str
 
 
-class AuthSchemaPostResponse(BaseModel):
+class LoginSchemaPostResponse(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
+
+
+class TokenPair(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+
+
+class RefreshRequest(BaseModel):
+    refresh_token: str
 
 
 class RegisterSchemaPostRequest(BaseModel):

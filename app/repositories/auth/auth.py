@@ -12,7 +12,7 @@ class AuthRepository:
         self.session = session
 
     async def create_refresh_token(self, user_uuid: UUID, token_hash: str, expires_at: datetime) -> RefreshTokenModel:
-        token = RefreshTokenModel(user_id=user_uuid, token_hash=token_hash, expires_at=expires_at)
+        token = RefreshTokenModel(user_uuid=user_uuid, token_hash=token_hash, expires_at=expires_at)
         self.session.add(token)
         await self.session.flush()
         return token

@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     REFRESH_TOKEN_EXPIRE_SECONDS: int
 
     APP_NAME: str = "Демо авторизации: session и JWT"
+    ACCESS_COOKIE_NAME: str = "access_token"
+    RESFRESH_COOKIE_NAME: str = "refresh_token"
+    SESSION_COOKIE_SECURE: bool = False
+    SESSION_COOKIE_DOMAIN: str | None = None
 
     @property
     def DATABASE_URL_asyncpg(self):

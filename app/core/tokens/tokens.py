@@ -1,7 +1,7 @@
 import hashlib
 import secrets
 from datetime import datetime, timedelta, timezone
-
+from uuid import UUID as python_UUID
 import jwt
 
 from app.core.config import settings
@@ -17,9 +17,9 @@ class TokenHelper:
         """Хэширует сессионный токен через SHA-256."""
         return hashlib.sha256(token.encode("utf-8")).hexdigest()
 
-    def create_access_token(self, user_id: int) -> str:
+    def create_access_token(self, user_uuid: python_UUID) -> str:
         """Формирует JWT access c типом access и истечением из настроек."""
-        return self._create_token(user_id, "access", settings.ACCESS_TOKEN_EXPIRE_SECONDS)
+        return self._create_token(user_uuid, "access", settings.ACCESS_TOKEN_EXPIRE_SECONDS)
 
     def create_refresh_token(self) -> str:
         """Создает долгоживущий случайный refresh токен (не JWT)."""
@@ -32,11 +32,11 @@ class TokenHelper:
             raise jwt.InvalidTokenError("Invalid token type")
         return payload
 
-    def _create_token(self, user_id: int, token_type: str, expires_seconds: int) -> str:
+    def _create_token(self, user_uuid: python_UUID, token_type: str, expires_seconds: int) -> str:
         """Собирает JWT с указанным типом и временем жизни."""
         now = datetime.now(timezone.utc)
         payload = {
-            "sub": str(user_id),
+            "sub": str(user_uuid),
             "type": token_type,
             "iat": int(now.timestamp()),
             "exp": int((now + timedelta(seconds=expires_seconds)).timestamp()),
