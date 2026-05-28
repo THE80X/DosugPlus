@@ -10,13 +10,17 @@ class DBManager:
     def __init__(self, session_factory: Callable[[], AsyncSession] = SessionLocal):
         self.session_factory = session_factory
         self.session: AsyncSession | None = None
+
         self.users: UserRepository | None = None
         self.auth: AuthRepository | None = None
+        self.event: EventRepository | None = None
 
     async def __aenter__(self) -> "DBManager":
         self.session = self.session_factory()
+
         self.users = UserRepository(self.session) ##НАЧНИ С НИХ
         self.auth = AuthRepository(self.session)
+        self.event = EventRepository(self.session)
         return self
 
     async def __aexit__(self, *args) -> None:

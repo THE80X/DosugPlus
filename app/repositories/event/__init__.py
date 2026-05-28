@@ -1,1 +1,1 @@
-from .event import EventRepository, EventUserRepository
+from .event import EventRepository

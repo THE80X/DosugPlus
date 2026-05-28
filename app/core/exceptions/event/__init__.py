@@ -1,0 +1,1 @@
+from .event import ERROR_DETAILS

@@ -1,5 +1,4 @@
-class AppError(Exception):
-    """Базовая ошибка приложения."""
+from ..default import AppError
 
 
 class RepositoryNotInitializedError(AppError):

@@ -1,13 +1,6 @@
 from .default import *
 from uuid import UUID as python_UUID
-from enum import Enum as PyEnum
-
-class EventStatuses(PyEnum):
-    signed = "signed"
-    kicked = "kicked"
-    left = "left"
-    payment_refuse = "payment_refuse"
-    reserve = "reserve"
+from app.schemas.enum import EventStatuses
 
 
 class EventModel(Base):

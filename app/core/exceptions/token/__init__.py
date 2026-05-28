@@ -1,1 +1,1 @@
-from .token import AppError, RepositoryNotInitializedError, InvalidCredentialsError, UserAlreadyExistsError, UserNotFoundError, RefreshTokenNotFoundError, RefreshTokenExpiredError
+from .token import RepositoryNotInitializedError, InvalidCredentialsError, UserAlreadyExistsError, UserNotFoundError, RefreshTokenNotFoundError, RefreshTokenExpiredError

@@ -18,7 +18,7 @@ def _set_token_cookies(response: Response, access_token: str, refresh_token: str
     response.set_cookie(
         key=settings.ACCESS_COOKIE_NAME,
         value=access_token,
-        httponly=False,
+        httponly=True,
         secure=settings.SESSION_COOKIE_SECURE,
         samesite="lax",
         max_age=settings.ACCESS_TOKEN_EXPIRE_SECONDS,
@@ -28,7 +28,7 @@ def _set_token_cookies(response: Response, access_token: str, refresh_token: str
     response.set_cookie(
         key=settings.RESFRESH_COOKIE_NAME,
         value=refresh_token,
-        httponly=False,
+        httponly=True,
         secure=settings.SESSION_COOKIE_SECURE,
         samesite="lax",
         max_age=settings.REFRESH_TOKEN_EXPIRE_SECONDS,
@@ -57,14 +57,13 @@ async def login(
 async def register(data: RegisterSchemaPostRequest, db: DBManagerDep)->UserRead:
     service = UserService(db)
     try:
-        return await service.register(data.name, data.password)
+        return await service.register(data.username, data.password)
     except Exception as err:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="User already exists") from err
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="USER_ALREDY_EXISTS") from err
     
 
-@router.post("/refesh", response_class=JSONResponse, summary="Обновление access/ refresh")
-async def refresh_tokens(token: TokenDep, 
-                         request: Request, 
+@router.post("/refresh", response_class=JSONResponse, summary="Обновление access/ refresh")
+async def refresh_tokens(request: Request, 
                          response: Response, db: DBManagerDep
 ) -> TokenPair:
     jwt_service = AuthServiceJWT(db)
@@ -77,5 +76,5 @@ async def refresh_tokens(token: TokenDep,
 
 
 @router.get("/info", summary="Профиль по JWT (access)")
-async def me_jwt(token: TokenDep, user: UserModel = Depends(get_current_user_from_bearer)) -> UserRead:
+async def me_jwt(user: UserModel = Depends(get_current_user_from_bearer)) -> UserRead:
     return user

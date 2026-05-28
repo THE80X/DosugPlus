@@ -22,7 +22,7 @@ class RefreshRequest(BaseModel):
 
 
 class RegisterSchemaPostRequest(BaseModel):
-    name: str
+    username: str
     password: str
 
 

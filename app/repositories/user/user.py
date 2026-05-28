@@ -3,7 +3,7 @@ from typing import Optional
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models.user import UserModel
+from app.models.user import UserModel, UserRole, RoleTypes
 from uuid import UUID
 
 
@@ -21,4 +21,6 @@ class UserRepository:
         user = UserModel(username=username, pwd_hash=password_hash)
         self.session.add(user)
         await self.session.flush()
+        user_role = UserRole(user_uuid=user.uuid, role=RoleTypes.user)
+        self.session.add(user_role)
         return user

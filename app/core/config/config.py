@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from fastapi import FastAPI
 
 
 class Settings(BaseSettings):
@@ -29,3 +30,4 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+app = FastAPI()

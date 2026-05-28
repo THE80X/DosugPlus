@@ -23,7 +23,7 @@ async def get_current_user_from_bearer(request: Request, session: SessionDep) ->
 
 
 def _extract_access_token(request: Request) -> str:
-    header = request.headers.get("authorization")
+    header = request.headers.get("Authorization")
     if header and header.lower().startswith("bearer "):
         return header.split(" ", 1)[1].strip()
     cookie_token = request.cookies.get(settings.ACCESS_COOKIE_NAME)

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мероприятия</title>
+    <link href="{{ url_for('static', path='css/main.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Табы -->
+        <div class="tabs-header">
+            <div class="tab active" data-page="events">Мероприятия</div>
+            <div class="tab" data-page="create">Созданные Мероприятия</div>
+            <div class="tab" data-page="my-tickets">Мои Записи</div>
+            <div class="tab" data-page="profile">Профиль</div>
+        </div>
+
+        <!-- Контент -->
+        <div class="content" id="content">
+            <!-- Загружается динамически -->
+        </div>
+    </div>
+</body>
+</html>
